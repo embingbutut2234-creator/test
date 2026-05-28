@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Data Diri & Pembayaran</title>
+<link rel="icon" href="img/Logo.png">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      background:#f4f7fb;
+      padding:40px 20px;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:1fr 400px;
+      gap:30px;
+    }
+
+    /* LEFT */
+
+    .left{
+      background:white;
+      border-radius:25px;
+      padding:35px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .title{
+      font-size:32px;
+      margin-bottom:10px;
+      color:#111;
+    }
+
+    .subtitle{
+      color:gray;
+      margin-bottom:35px;
+    }
+
+    .section-title{
+      font-size:22px;
+      margin-bottom:20px;
+      color:#222;
+    }
+
+    .input-group{
+      margin-bottom:20px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:600;
+    }
+
+    .input-group input,
+    .input-group select{
+      width:100%;
+      padding:16px;
+      border:1px solid #ccc;
+      border-radius:14px;
+      font-size:16px;
+      outline:none;
+      transition:0.3s;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus{
+      border-color:#0077ff;
+      box-shadow:0 0 0 4px rgba(0,119,255,0.1);
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+
+    /* PAYMENT METHOD */
+
+    .method{
+      border:2px solid #ddd;
+      padding:18px;
+      border-radius:16px;
+      margin-bottom:15px;
+      cursor:pointer;
+      transition:0.3s;
+      font-weight:bold;
+    }
+
+    .method:hover{
+      border-color:#0077ff;
+    }
+
+    .method.active{
+      border-color:#0077ff;
+      background:#f0f7ff;
+    }
+
+    /* RIGHT */
+
+    .right{
+      background:white;
+      border-radius:25px;
+      padding:35px;
+      height:fit-content;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+      position:sticky;
+      top:20px;
+    }
+
+    .summary-title{
+      font-size:26px;
+      margin-bottom:25px;
+    }
+
+    .ticket-card{
+      background:#f7f9fc;
+      border-radius:20px;
+      padding:20px;
+      margin-bottom:25px;
+    }
+
+    .ticket-card h2{
+      margin-bottom:10px;
+    }
+
+    .route{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin:20px 0;
+      font-weight:bold;
+    }
+
+    .price-row{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:15px;
+      color:#444;
+    }
+
+    .line{
+      width:100%;
+      height:1px;
+      background:#ddd;
+      margin:20px 0;
+    }
+
+    .total{
+      font-size:24px;
+      font-weight:bold;
+      color:#0077ff;
+    }
+
+    .button-group{
+      display:flex;
+      gap:15px;
+      margin-top:30px;
+    }
+
+    .back-btn,
+    .pay-btn{
+      flex:1;
+      padding:18px;
+      border:none;
+      border-radius:16px;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .back-btn{
+      background:#ddd;
+    }
+
+    .back-btn:hover{
+      background:#cfcfcf;
+    }
+
+    .pay-btn{
+      background:#0077ff;
+      color:white;
+    }
+
+    .pay-btn:hover{
+      background:#005fd1;
+    }
+
+    .secure{
+      text-align:center;
+      margin-top:20px;
+      color:gray;
+      font-size:14px;
+    }
+
+    @media(max-width:900px){
+
+      .container{
+        grid-template-columns:1fr;
+      }
+
+      .right{
+        position:relative;
+      }
+
+    }
+
+    @media(max-width:600px){
+
+      .row{
+        grid-template-columns:1fr;
+      }
+
+      .button-group{
+        flex-direction:column;
+      }
+
+      .left,
+      .right{
+        padding:25px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- LEFT -->
+    <div class="left">
+
+      <h1 class="title">
+        Data Penumpang
+      </h1>
+
+      <p class="subtitle">
+        Lengkapi data diri dan pilih metode pembayaran
+      </p>
+
+      <!-- DATA DIRI -->
+
+      <h2 class="section-title">
+        Data Diri
+      </h2>
+
+      <div class="row">
+
+        <div class="input-group">
+          <label>Nama Depan</label>
+          <input type="text" placeholder="Nama depan">
+        </div>
+
+        <div class="input-group">
+          <label>Nama Belakang</label>
+          <input type="text" placeholder="Nama belakang">
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@gmail.com">
+        </div>
+
+        <div class="input-group">
+          <label>Nomor HP</label>
+          <input type="number" placeholder="08xxxxxxxxxx">
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="input-group">
+          <label>Jenis Kelamin</label>
+
+          <select>
+            <option>Laki-laki</option>
+            <option>Perempuan</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Tanggal Lahir</label>
+          <input type="date">
+        </div>
+
+      </div>
+
+      <div class="input-group">
+        <label>Nomor Paspor / KTP</label>
+        <input type="text" placeholder="Masukkan nomor identitas">
+      </div>
+
+      <!-- PAYMENT -->
+
+      <h2 class="section-title" style="margin-top:40px;">
+        Metode Pembayaran
+      </h2>
+
+      <div class="method active" onclick="selectMethod(this)">
+        💳 Kartu Kredit / Debit
+      </div>
+
+      <div class="method" onclick="selectMethod(this)">
+        🏦 Transfer Bank
+      </div>
+
+      <div class="method" onclick="selectMethod(this)">
+        📱 E-Wallet
+      </div>
+
+      <!-- CARD -->
+
+      <div class="input-group">
+        <label>Nama Pemilik Kartu</label>
+        <input type="text" placeholder="Nama lengkap">
+      </div>
+
+      <div class="input-group">
+        <label>Nomor Kartu</label>
+        <input type="text" placeholder="1234 5678 9012 3456">
+      </div>
+
+      <div class="row">
+
+        <div class="input-group">
+          <label>Masa Berlaku</label>
+          <input type="text" placeholder="MM/YY">
+        </div>
+
+        <div class="input-group">
+          <label>CVV</label>
+          <input type="password" placeholder="***">
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+      <h2 class="summary-title">
+        Detail Pembayaran
+      </h2>
+
+      <div class="ticket-card">
+
+        <h2>singapore Airlines</h2>
+
+        <div class="route">
+          <span>CGK</span>
+          <span>✈️</span>
+          <span>DXB</span>
+        </div>
+
+        <p>07:30 - 10:20</p>
+
+      </div>
+
+      <div class="price-row">
+        <span>Tiket Pesawat</span>
+        <span>Rp 9.200.000</span>
+      </div>
+
+      <div class="price-row">
+        <span>Pajak</span>
+        <span>Rp 200.000</span>
+      </div>
+
+      <div class="price-row">
+        <span>Biaya Layanan</span>
+        <span>Rp 150.000</span>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="price-row total">
+        <span>Total</span>
+        <span>Rp 9.550.000</span>
+      </div>
+
+      <div class="button-group">
+
+        <button class="back-btn" onclick="goBack()">
+          ← Kembali
+        </button>
+
+        <button class="pay-btn" onclick="payNow()">
+          Bayar
+        </button>
+
+      </div>
+
+      <p class="secure">
+        🔒 Pembayaran Aman & Terenkripsi
+      </p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const methods =
+    document.querySelectorAll(".method");
+
+    function selectMethod(selected){
+
+      methods.forEach(method => {
+        method.classList.remove("active");
+      });
+
+      selected.classList.add("active");
+
+    }
+
+    function goBack(){
+
+      window.history.back();
+
+    }
+
+    function payNow(){
+
+      alert("Pembayaran berhasil!");
+
+      window.location.href = "eticket.html";
+
+    }
+
+  </script>
+
+</body>
+</html>
